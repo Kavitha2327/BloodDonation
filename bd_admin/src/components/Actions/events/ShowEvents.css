@@ -1,0 +1,157 @@
+.events-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows cards to wrap onto the next line */
+  justify-content: center; /* Center the cards */
+  padding: 40px 20px; /* Add padding around the container */
+  gap: 20px; /* Space between cards */
+}
+
+.event-card {
+  background-color: #fff; /* White background for cards */
+  border-radius: 12px; /* More pronounced rounded corners */
+  width: 300px; /* Fixed width for cards */
+  height: 350px; /* Fixed height for cards */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+}
+.css-1lt5qva-MuiCardContent-root {
+  padding: 8px !important;
+}
+
+.add-event-btn {
+  font-size: 1rem;
+}
+
+.event-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
+}
+
+.event-card img {
+  width: 100%; /* Full width image */
+  height: 200px; /* Fixed height for images */
+  object-fit: cover; /* Cover the area */
+  transition: transform 0.5s ease; /* Smooth scaling effect */
+}
+
+.event-card img:hover {
+  transform: scale(1.05); /* Slight zoom effect on image hover */
+}
+
+.event-card-content {
+  padding: 15px; /* Padding inside the card */
+  text-align: center; /* Center align text */
+  flex-grow: 1; /* Allow content to grow */
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  justify-content: flex-end; /* Push content to the bottom */
+}
+
+.event-card-content h3 {
+  font-size: 20px; /* Slightly smaller heading */
+  margin: 10px 0; /* Margin around the heading */
+  color: #2c3e50; /* Darker text color for better contrast */
+  overflow: hidden; /* Prevent overflow */
+  text-overflow: ellipsis; /* Add ellipsis for overflow */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.event-card-content p {
+  margin: 5px 0; /* Margin for paragraphs */
+  color: #7f8c8d; /* Lighter text color for description */
+}
+
+.event-card-content .date-venue {
+  display: flex;
+  justify-content: space-between; /* Space between date and venue */
+  font-size: 14px; /* Smaller font size for date and venue */
+  color: #95a5a6; /* Lighter color for date and venue */
+  margin-top: 10px; /* Margin above the date and venue */
+}
+
+@media screen and (max-width: 600px) {
+  .add-event-btn {
+    width: 50% !important;
+    font-size: 0.8rem;
+  }
+}
+
+.addVolunteer {
+  background-color: #333333; 
+  border: none !important;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Adds a shadow with 4px horizontal & vertical offset, 10px blur, and a semi-transparent black color */
+}
+
+.addVolunteer:hover {
+  background-color:rgba(33, 33, 33, 0.863);
+  
+}
+
+.addVolunteer:active {
+  background-color:rgba(33, 33, 33, 0.863) !important;  
+
+}
+
+.addVolunteer:focus {
+  background-color:black !important;  
+
+}
+
+.adminCollege {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.adminCollege input {
+  margin-bottom: 4px;
+}
+
+.addEventCollegeBlock {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+.addEventCollegeBlock span {
+  font-weight: 600;
+  color: #333;
+}
+
+.event-colleges-info {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+.event-colleges-info::-webkit-scrollbar {
+  width: 4px;
+}
+
+.event-colleges-info::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.event-colleges-info::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.college-info {
+  margin-bottom: 8px;
+  padding: 5px;
+  border-left: 3px solid #007bff;
+  background-color: #f8f9fa;
+}
+
+.blood-bank-info {
+  font-size: 12px;
+  color: #666;
+  margin-left: 10px;
+  padding: 2px 0;
+}
