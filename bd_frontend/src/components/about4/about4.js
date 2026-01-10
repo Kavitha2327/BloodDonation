@@ -87,7 +87,7 @@ const About4 = () => {
                                 <p className="aboutContent__text">
                                     There are many lives we have impacted through your donations, but the majority of our success comes from the dedication of donors like you. By participating in our drives, volunteering your time, or spreading awareness, you’ve ensured every drop counts.There are many ways to help, and each act strengthens the community we serve together.
                                 </p>
-                                <span className="aboutContent__quote">join our Action and everyone can help</span>
+                                <span className="aboutContent__quote">Join our Action  Everyone can help</span>
                             </div>
                         </div>
 

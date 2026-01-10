@@ -61,7 +61,7 @@ function GenderWiseChart() {
         className="chart-title"
         style={{ marginBottom: 50, alignSelf: "center", marginTop: 20 }}
       >
-        Gender Wise Count
+        Gender-Wise Count
       </h4>
       <PieChart
         series={[

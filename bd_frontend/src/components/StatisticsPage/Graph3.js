@@ -113,7 +113,7 @@ export default function Chart3(props) {
 
   return (
     <div className='chart2'>
-            <h2 className="chart-title">Blood group Count</h2>
+            <h2 className="chart-title">Blood Group-Wise Count</h2>
     <BarChart
       width={500}
       height={350}

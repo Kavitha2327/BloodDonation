@@ -66,9 +66,9 @@ const DonationListing = (props) => {
                                 <div className="sectionTitle text-center mb-70">
                                     <span className="sectionTitle__small justify-content-center">
                                         <i className="fa-solid fa-heart btn__icon"></i>
-                                        Donation Listing
+                                        Our Mission in Action
                                     </span>
-                                    <h2 className="sectionTitle__big">Introduse Our Campains</h2>
+                                    <h2 className="sectionTitle__big">Introducing Our Campaigns</h2>
                                 </div>
                             </div>
                         </div>
