@@ -87,7 +87,7 @@ function VenueWiseCounts() {
         className="chart-title"
         style={{ marginBottom: 20, alignSelf: "center", marginTop: 20 }}
       >
-        Venue Wise Count
+        Venue-Wise Count
       </h4>
       {isLoading ? (
         <p style={{ textAlign: "center" }}>Loading chart data...</p>

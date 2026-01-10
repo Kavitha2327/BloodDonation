@@ -102,7 +102,7 @@ const Example = (props) => {
 
     return (
         <div className="chart2">
-            <h2 className="chart-title">Gender Wise Count</h2>
+            <h2 className="chart-title">Gender-Wise Count</h2>
             <ResponsiveContainer width="100%" height="100%" >
                 <PieChart>
                     <Pie

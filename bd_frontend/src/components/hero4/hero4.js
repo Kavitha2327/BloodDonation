@@ -32,7 +32,7 @@ const Hero4 = (props) => {
                             </Slide>
                             <Slide direction='up' triggerOnce={'false'} duration={1200}>
                                 <div>
-                                    <p className="hero__text text-white wow animate__fadeInUp animate__animated" data-wow-duration="1200ms" data-wow-delay="400ms">We connect donors with those in need, ensuring blood reaches patients swiftly, saving lives everywhere it’s</p>
+                                    <p className="hero__text text-white wow animate__fadeInUp animate__animated" data-wow-duration="1200ms" data-wow-delay="400ms">We connect donors with those in need, ensuring blood reaches patients swiftly, saving lives everywhere its needed.</p>
                                 </div>
                             </Slide>
                             <Slide direction='up' triggerOnce={'false'} duration={1200}>

@@ -80,7 +80,7 @@ function CollegeWiseChart() {
   return (
     <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
       <h4 className="chart-title" style={{ marginBottom: 20, alignSelf: "center", marginTop: 20 }}>
-        College Wise Count
+        College-Wise Count
       </h4>
       {isLoading ? (
         <p style={{ textAlign: "center" }}>Loading chart data...</p>

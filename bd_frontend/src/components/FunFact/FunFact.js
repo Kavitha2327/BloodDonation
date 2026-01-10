@@ -43,7 +43,7 @@ const FunFactSection = (props) => {
             sclass: 'factBlock--two',
         },
         {
-            title: '500',
+            title: '16000',
             subTitle: 'Lives saved',
             symbol: '+',
             des: 'Families reunited, hopes restored, and futures secured through blood donation.',
@@ -78,7 +78,7 @@ const FunFactSection = (props) => {
                                 <i className="fa-solid fa-heart btn__icon"></i>
                                 need your help
                             </span>
-                            <h2 className="sectionTitle__big">we are always where others need help</h2>
+                            <h2 className="sectionTitle__big">we are always there when others need help</h2>
                         </div>
                     </div>
                 </div>

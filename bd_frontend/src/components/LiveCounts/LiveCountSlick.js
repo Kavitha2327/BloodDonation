@@ -29,9 +29,9 @@ function LiveCountSlick() {
         <div style={{display:"flex", alignItems: "center", height :"100%"}}>
           <GenderWiseChart />
         </div>
-        {/* <div>
+        <div>
           <BranchWiseChart />
-        </div> */}
+        </div>
         <div>
           <BloodGroupChart />
         </div>

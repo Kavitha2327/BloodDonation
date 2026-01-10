@@ -24,7 +24,7 @@ const AboutUsPage = (props) => {
                                 <div className="sectionTitle text-center mb-30">
                                     <span className="sectionTitle__small justify-content-center">
                                         <i className="fa-solid fa-heart btn__icon"></i>
-                                        about foundation
+                                        about our foundation
                                     </span>
                                     <h2 className="sectionTitle__big">We are always there others need help</h2>
                                 </div>

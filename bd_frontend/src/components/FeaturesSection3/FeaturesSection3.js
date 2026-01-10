@@ -12,14 +12,14 @@ import icon3 from '../../images/icons/icon3.svg'
 const Features = [
     {
         title: 'Stays healthy',
-        des: 'Donating boosts heart health, giving you purpose and lowering risks.',
+        des: 'Donating boosts heart health, gives you sense of purpose, and lowers risks.',
         icon: icon1,
         width: '100%',
         duration: 1000,
     },
     {
         title: 'Being young',
-        des: 'Donating boosts well-being, giving you a sense of purpose and energy.',
+        des: 'Donating boosts well-being, gives you a sense of purpose and energy.',
         icon: icon2,
         width: '100%',
         duration: 1200,

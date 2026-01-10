@@ -63,7 +63,7 @@ export default function BloodGroupChart(props) {
 
   return (
     <div className="chart2">
-      <h2 className="chart-title">Blood Group Count</h2>
+      <h2 className="chart-title">Blood Group-Wise Count</h2>
       {isLoading ? (
         <div>Loading...</div> // Display loading message while data is being fetched
       ) : (
