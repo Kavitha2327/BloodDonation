@@ -100,7 +100,8 @@ const StatisticsPage = (props) => {
                   fontSize: "25px",
                 }}
               >
-                {CollegeName[option]}
+                {CollegeName[option]? CollegeName[option] : option}
+              
               </h2>
             </u>
           </center>

@@ -81,7 +81,7 @@ const StatisticsPage = (props) => {
                     </div>
                     <div className='graph-container'>
                         {/* {console.log(collegeName)} */}
-                    <u style={{color:"black", textAlign: "center"}}> <h3 className="sectionTitle__big" >{collegeName[option]}</h3></u>
+                    <u style={{color:"black", textAlign: "center"}}> <h3 className="sectionTitle__big" >{collegeName[option]? collegeName[option] : option}</h3></u>
                         <div className='Graphs-1'>
                             
                             <Graph1 college = {option}/>
