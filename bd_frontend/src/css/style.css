@@ -3022,6 +3022,11 @@ html {
   margin-bottom: 46px;
 }
 
+.aboutContent__quote .gap {
+  margin-left: 20px;   /* 👈 horizontal gap */
+}
+
+
 .aboutContent__buttons {
   display: flex;
   gap: 20px;

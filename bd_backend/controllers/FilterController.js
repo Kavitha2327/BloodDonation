@@ -92,23 +92,23 @@ const BloodGroupHandler = async (req, res) => {
 
     //const toDate = new Date("2025-01-28");
     //toDate.setUTCHours(23, 59, 59, 999);
-    const toDate = new Date()
+    const toDate = new Date();
     const fromDate = new Date("2025-01-28");
     fromDate.setUTCHours(0, 0, 0, 0);
 
     const matchStage = {};
     if (College) {
       matchStage.College = College;
-    } if (EventDate) {
+    }
+    if (EventDate) {
       matchStage.EventDate = { $gte: fromDate, $lt: toDate };
     }
     if (collegeCode) {
       matchStage.collegeCode = collegeCode;
-      if (['Guest', 'Management'].includes(collegeCode)) {
-        delete matchStage.collegeCode
-        matchStage.TypeOfDonor = collegeCode
+      if (["Guest", "Management"].includes(collegeCode)) {
+        delete matchStage.collegeCode;
+        matchStage.TypeOfDonor = collegeCode;
       }
-
     }
 
     const aggregationPipeline = [];
@@ -158,129 +158,21 @@ const BloodGroupHandler = async (req, res) => {
   }
 };
 
-
 // --------------------------------------------------------------------------------------------------------------------------------
-
-// const DonorCountHandler = async (req, res) => {
-//   try {
-//     const { collegeCode, EventDate, Department } = req.query;
-//     //const toDate = new Date("2025-01-28");
-//     //toDate.setUTCHours(23, 59, 59, 999);
-//     const toDate = new Date()
-//     const fromDate = new Date("2025-01-28");
-//     fromDate.setUTCHours(0, 0, 0, 0);
-
-//     const matchStage = {};
-//     if (collegeCode) {
-//       matchStage.collegeCode = collegeCode;
-//     } else if (EventDate) {
-//       matchStage.EventDate = { $gte: fromDate, $lt: toDate };
-//     }
-
-//     const aggregationPipeline = [];
-//     if (Object.keys(matchStage).length > 0) {
-//       aggregationPipeline.push({ $match: matchStage });
-//     }
-
-//     let groupStage;
-//     if (Department) {
-//       groupStage = {
-//         _id: "$Department", // Group by Department
-//         donorCount: { $sum: 1 },
-//       };
-//     } else if (!collegeCode) {
-//       groupStage = {
-//         _id: "$collegeCode", // Group by collegeCode
-//         donorCount: { $sum: 1 },
-//       };
-//     } else {
-//       groupStage = {
-//         _id: "$Department", // Group by Department when filtering by collegeCode
-//         donorCount: { $sum: 1 },
-//       };
-//     }
-
-//     aggregationPipeline.push({ $group: groupStage });
-
-//     const studentCount = await StudentSchema.aggregate(aggregationPipeline);
-//     const staffCount = await StaffSchema.aggregate(aggregationPipeline);
-
-//     // For management and guest, we can only include them when not filtering by Department or collegeCode
-//     let managementCount = [];
-//     if (!Department && !collegeCode && EventDate) {
-//       // For management and guest, we'll group by TypeOfDonor since they don't have Department
-//       const managementPipeline = [
-//         { $match: { EventDate: { $gte: fromDate, $lt: toDate } } },
-//         {
-//           $group: {
-//             _id: "$TypeOfDonor", // Group by TypeOfDonor for management
-//             donorCount: { $sum: 1 },
-//           },
-//         },
-//       ];
-//       managementCount = await managementandguest.aggregate(managementPipeline);
-//     }
-
-//     const mergedCounts = {};
-//     const addCounts = (counts) => {
-//       counts.forEach(({ _id, donorCount }) => {
-//         if (!mergedCounts[_id]) {
-//           mergedCounts[_id] = 0;
-//         }
-//         mergedCounts[_id] += donorCount;
-//       });
-//     };
-
-//     addCounts(studentCount);
-//     addCounts(staffCount);
-//     addCounts(managementCount);
-
-//     const sortedMergedCounts = Object.keys(mergedCounts)
-//       .sort()
-//       .reduce((acc, key) => {
-//         acc[key] = mergedCounts[key];
-//         return acc;
-//       }, {});
-
-//     // Transform the data into the required format if EventDate is provided
-//     if (EventDate) {
-//       const formattedData = [
-//         {
-//           scaleType: "band",
-//           data: Object.keys(sortedMergedCounts), // Extract keys as data (x-axis labels)
-//         },
-//       ];
-
-//       const seriesData = Object.values(sortedMergedCounts); // Extract values (y-axis data)
-
-//       return res.status(200).json({
-//         xAxis: formattedData,
-//         series: [{ data: seriesData }],
-//       });
-//     }
-
-//     // Default response for other cases
-//     return res.status(200).json(sortedMergedCounts);
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({ message: "Server Error" });
-//   }
-// };
 
 const DonorCountHandler = async (req, res) => {
   try {
     const { collegeCode, EventDate, Department } = req.query;
-
-    const toDate = new Date();
+    //const toDate = new Date("2025-01-28");
+    //toDate.setUTCHours(23, 59, 59, 999);
+    const toDate = new Date()
     const fromDate = new Date("2025-01-28");
     fromDate.setUTCHours(0, 0, 0, 0);
 
     const matchStage = {};
-    if (collegeCode && !["Guest", "Management"].includes(collegeCode)) {
+    if (collegeCode) {
       matchStage.collegeCode = collegeCode;
-    }
-
-    if (EventDate) {
+    } else if (EventDate) {
       matchStage.EventDate = { $gte: fromDate, $lt: toDate };
     }
 
@@ -291,64 +183,62 @@ const DonorCountHandler = async (req, res) => {
 
     let groupStage;
     if (Department) {
-      groupStage = { _id: "$Department", donorCount: { $sum: 1 } };
+      groupStage = {
+        _id: "$Department", // Group by Department
+        donorCount: { $sum: 1 },
+      };
+    } else if (!collegeCode) {
+      groupStage = {
+        _id: "$collegeCode", // Group by collegeCode
+        donorCount: { $sum: 1 },
+      };
     } else {
-      groupStage = { _id: "$collegeCode", donorCount: { $sum: 1 } };
+      groupStage = {
+        _id: "$Department", // Group by Department when filtering by collegeCode
+        donorCount: { $sum: 1 },
+      };
     }
 
     aggregationPipeline.push({ $group: groupStage });
 
-    let studentCount = [];
-    let staffCount = [];
+    const studentCount = await StudentSchema.aggregate(aggregationPipeline);
+    const staffCount = await StaffSchema.aggregate(aggregationPipeline);
+
+    // For management and guest, we can only include them when not filtering by Department or collegeCode
     let managementCount = [];
 
-    //  CASE 1: No collegeCode → ALL DATABASES
-    if (!collegeCode) {
-      studentCount = await StudentSchema.aggregate(aggregationPipeline);
-      staffCount = await StaffSchema.aggregate(aggregationPipeline);
+    const managementPipeline = [
+      { $match: { EventDate: { $gte: fromDate, $lt: toDate } } },
+      {
+        $group: {
+          _id: "$TypeOfDonor", // Group by TypeOfDonor for management
+          donorCount: { $sum: 1 },
+        },
+      },
+    ];
+    managementCount = await managementandguest.aggregate(managementPipeline);
 
-      managementCount = await managementandguest.aggregate([
-        { $match: EventDate ? { EventDate: { $gte: fromDate, $lt: toDate } } : {} },
+    if (!Department && !collegeCode && EventDate) {
+      // For management and guest, we'll group by TypeOfDonor since they don't have Department
+      const managementPipeline = [
+        { $match: { EventDate: { $gte: fromDate, $lt: toDate } } },
         {
           $group: {
-            _id: "$TypeOfDonor",
+            _id: "$TypeOfDonor", // Group by TypeOfDonor for management
             donorCount: { $sum: 1 },
           },
         },
-      ]);
+      ];
+      managementCount = await managementandguest.aggregate(managementPipeline);
     }
 
-    //  CASE 2: Guest or Management ONLY
-    else if (["Guest", "Management"].includes(collegeCode)) {
-      managementCount = await managementandguest.aggregate([
-        {
-          $match: {
-            TypeOfDonor: collegeCode,
-            ...(EventDate && { EventDate: { $gte: fromDate, $lt: toDate } }),
-          },
-        },
-        {
-          $group: {
-            _id: "$TypeOfDonor",
-            donorCount: { $sum: 1 },
-          },
-        },
-      ]);
-    }
-
-    //  CASE 3: Any OTHER collegeCode → Student + Staff ONLY
-    else {
-      studentCount = await StudentSchema.aggregate(aggregationPipeline);
-      staffCount = await StaffSchema.aggregate(aggregationPipeline);
-      //  NO managementandguest here
-    }
-
-    //  MERGE COUNTS
     const mergedCounts = {};
-
-    const addCounts = (counts = []) => {
+    const addCounts = (counts) => {
       counts.forEach(({ _id, donorCount }) => {
-        mergedCounts[_id] = (mergedCounts[_id] || 0) + donorCount;
+        if (!mergedCounts[_id]) {
+          mergedCounts[_id] = 0;
+        }
+        mergedCounts[_id] += donorCount;
       });
     };
 
@@ -356,22 +246,145 @@ const DonorCountHandler = async (req, res) => {
     addCounts(staffCount);
     addCounts(managementCount);
 
-    // EVENT DATE FORMAT RESPONSE
+    const sortedMergedCounts = Object.keys(mergedCounts)
+      .sort()
+      .reduce((acc, key) => {
+        acc[key] = mergedCounts[key];
+        return acc;
+      }, {});
+
+    // Transform the data into the required format if EventDate is provided
     if (EventDate) {
+      const formattedData = [
+        {
+          scaleType: "band",
+          data: Object.keys(sortedMergedCounts), // Extract keys as data (x-axis labels)
+        },
+      ];
+
+      const seriesData = Object.values(sortedMergedCounts); // Extract values (y-axis data)
+
       return res.status(200).json({
-        xAxis: [{ scaleType: "band", data: Object.keys(mergedCounts) }],
-        series: [{ data: Object.values(mergedCounts) }],
+        xAxis: formattedData,
+        series: [{ data: seriesData }],
       });
     }
 
-    return res.status(200).json(mergedCounts);
+    // Default response for other cases
+    return res.status(200).json(sortedMergedCounts);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Server Error" });
   }
 };
 
+// const DonorCountHandler = async (req, res) => {
+//   try {
+//     const { collegeCode, EventDate, Department } = req.query;
 
+//     const toDate = new Date();
+//     const fromDate = new Date("2025-01-28");
+//     fromDate.setUTCHours(0, 0, 0, 0);
+
+//     const matchStage = {};
+//     if (collegeCode && !["Guest", "Management"].includes(collegeCode)) {
+//       matchStage.collegeCode = collegeCode;
+//     }
+
+//     if (EventDate) {
+//       matchStage.EventDate = { $gte: fromDate, $lt: toDate };
+//     }
+
+//     const aggregationPipeline = [];
+//     if (Object.keys(matchStage).length > 0) {
+//       aggregationPipeline.push({ $match: matchStage });
+//     }
+
+//     let groupStage;
+//     if (Department) {
+//       groupStage = { _id: "$Department", donorCount: { $sum: 1 } };
+//     } else {
+//       groupStage = { _id: "$collegeCode", donorCount: { $sum: 1 } };
+//     }
+
+//     aggregationPipeline.push({ $group: groupStage });
+
+//     let studentCount = [];
+//     let staffCount = [];
+//     let managementCount = [];
+
+//     //  CASE 1: No collegeCode → ALL DATABASES
+//     if (!collegeCode) {
+//       studentCount = await StudentSchema.aggregate(aggregationPipeline);
+//       staffCount = await StaffSchema.aggregate(aggregationPipeline);
+
+//       managementCount = await managementandguest.aggregate([
+//         {
+//           $match: EventDate
+//             ? { EventDate: { $gte: fromDate, $lt: toDate } }
+//             : {},
+//         },
+//         {
+//           $group: {
+//             _id: "$TypeOfDonor",
+//             donorCount: { $sum: 1 },
+//           },
+//         },
+//       ]);
+//     }
+
+//     //  CASE 2: Guest or Management ONLY
+//     else if (["Guest", "Management"].includes(collegeCode)) {
+//       managementCount = await managementandguest.aggregate([
+//         {
+//           $match: {
+//             TypeOfDonor: collegeCode,
+//             ...(EventDate && { EventDate: { $gte: fromDate, $lt: toDate } }),
+//           },
+//         },
+//         {
+//           $group: {
+//             _id: "$TypeOfDonor",
+//             donorCount: { $sum: 1 },
+//           },
+//         },
+//       ]);
+//     }
+
+//     //  CASE 3: Any OTHER collegeCode → Student + Staff ONLY
+//     else {
+//       studentCount = await StudentSchema.aggregate(aggregationPipeline);
+//       staffCount = await StaffSchema.aggregate(aggregationPipeline);
+//       //  NO managementandguest here
+//     }
+
+//     //  MERGE COUNTS
+//     const mergedCounts = {};
+
+//     const addCounts = (counts = []) => {
+//       counts.forEach(({ _id, donorCount }) => {
+//         mergedCounts[_id] = (mergedCounts[_id] || 0) + donorCount;
+//       });
+//     };
+
+//     addCounts(studentCount);
+//     addCounts(staffCount);
+//     addCounts(managementCount);
+
+//     // EVENT DATE FORMAT RESPONSE
+//     if (EventDate) {
+//       return res.status(200).json({
+//         xAxis: [{ scaleType: "band", data: Object.keys(mergedCounts) }],
+//         series: [{ data: Object.values(mergedCounts) }],
+//       });
+//     }
+
+//     return res.status(200).json(mergedCounts);
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ message: "Server Error" });
+//   }
+// };
 
 // --------------------------------------------------------------------------------------------------------------------------------
 
@@ -451,7 +464,6 @@ const GalleryDataHandler = async (req, res) => {
 
 // --------------------------------------------------------------------------------------------------------------------------------
 
-
 const GenderCountHandler = async (req, res) => {
   try {
     const { College, EventDate, collegeCode } = req.query;
@@ -462,22 +474,19 @@ const GenderCountHandler = async (req, res) => {
     const fromDate = new Date("2025-01-28");
     fromDate.setUTCHours(0, 0, 0, 0);
 
-
     const matchStage = {};
-
-
 
     if (College) {
       matchStage.College = College;
-
-    } if (EventDate) {
+    }
+    if (EventDate) {
       matchStage.EventDate = { $gte: fromDate, $lte: toDate };
     }
     if (collegeCode) {
       matchStage.collegeCode = collegeCode;
-      if (['Guest', 'Management'].includes(collegeCode)) {
-        delete matchStage.collegeCode
-        matchStage.TypeOfDonor = collegeCode
+      if (["Guest", "Management"].includes(collegeCode)) {
+        delete matchStage.collegeCode;
+        matchStage.TypeOfDonor = collegeCode;
       }
     }
 
@@ -534,9 +543,6 @@ const GenderCountHandler = async (req, res) => {
     return res.status(500).json({ message: "Server Error" });
   }
 };
-
-
-
 
 const LiveCountHandler = async (req, res) => {
   try {
@@ -723,11 +729,9 @@ const GetDonatedData = async (req, res) => {
     const parsedEventDate = new Date(eventDate);
 
     if (isNaN(parsedEventDate)) {
-      return res
-        .status(400)
-        .json({
-          message: "Invalid EventDate format. Use YYYY-MM-DD or ISO format.",
-        });
+      return res.status(400).json({
+        message: "Invalid EventDate format. Use YYYY-MM-DD or ISO format.",
+      });
     }
 
     // console.log(`Parsed EventDate: ${parsedEventDate}`);
@@ -916,12 +920,10 @@ const student = async (req, res) => {
     }
   } catch (error) {
     console.error("Error retrieving student:", error.message);
-    return res
-      .status(500)
-      .json({
-        message: "An error occurred while fetching student details",
-        error,
-      });
+    return res.status(500).json({
+      message: "An error occurred while fetching student details",
+      error,
+    });
   }
 };
 
@@ -950,11 +952,9 @@ const getUpcomingEvent = async (req, res) => {
     res.status(200).json(upcomingEvent[0]);
   } catch (error) {
     console.error("Error fetching upcoming event:", error);
-    res
-      .status(500)
-      .json({
-        message: "An error occurred while fetching the upcoming event.",
-      });
+    res.status(500).json({
+      message: "An error occurred while fetching the upcoming event.",
+    });
   }
 };
 
@@ -991,7 +991,7 @@ const VenueCountHandler = async (req, res) => {
     const { collegeCode, EventDate, Department } = req.query;
     //const toDate = new Date("2025-01-28");
     //toDate.setUTCHours(23, 59, 59, 999);
-    const toDate = new Date()
+    const toDate = new Date();
     const fromDate = new Date("2025-01-28");
     fromDate.setUTCHours(0, 0, 0, 0);
 
@@ -1021,7 +1021,9 @@ const VenueCountHandler = async (req, res) => {
     // Get counts from all donor types
     const studentCount = await StudentSchema.aggregate(aggregationPipeline);
     const staffCount = await StaffSchema.aggregate(aggregationPipeline);
-    const managementCount = await managementandguest.aggregate(aggregationPipeline);
+    const managementCount = await managementandguest.aggregate(
+      aggregationPipeline
+    );
 
     const mergedCounts = {};
     const addCounts = (counts) => {

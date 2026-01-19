@@ -39,6 +39,7 @@ export default function VolunteerCard(props) {
                   <MDBCardImage
                     style={{ width: "120px", borderRadius: "10px" }}
                     src={`https://info.aec.edu.in/adityacentral/studentphotos/${code}.jpg`}
+                    // src={`https://adityauniversity.in/latecomersbackendapi/get-Student-Data/${code}.jpg`}
                     alt="Volunteer image"
                     fluid
                   />
