@@ -554,10 +554,10 @@ function StudentForm() {
                       onChange={handleInputChange}
                       validate={{
                         required: { value: true },
-                        pattern: {
-                          value: "^[a-zA-Z0-9]+$",
-                          errorMessage: "Invalid Roll Number",
-                        },
+                        // pattern: {
+                        //   value: "^[a-zA-Z0-9]+$",
+                        //   errorMessage: "Invalid Roll Number",
+                        // },
                       }}
                     />
                   </Col>
