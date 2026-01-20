@@ -859,17 +859,17 @@ const GetDonatedData = async (req, res) => {
     // Fetch data from all schemas based on the EventDate
     const staffData = await StaffSchema.find({
       EventDate: { $gte: startOfDay, $lt: endOfDay },
-    }).select("Name MobileNumber College Department Venue Gender EmployeeId");
+    }).select("Name MobileNumber College Department Venue Gender EmployeeId BloodGroup");
 
     const studentData = await StudentSchema.find({
       EventDate: { $gte: startOfDay, $lt: endOfDay },
-    }).select("Name MobileNumber College Department Venue Gender Rollno");
+    }).select("Name MobileNumber College Department Venue Gender Rollno BloodGroup");
 
     const managementAndGuestData = await managementandguest
       .find({
         EventDate: { $gte: startOfDay, $lt: endOfDay },
       })
-      .select("Name TypeOfDonor MobileNumber Venue Gender");
+      .select("Name TypeOfDonor MobileNumber Venue Gender BloodGroup");
 
     // Map data to a uniform structure
     const formattedStaffData = staffData.map((staff) => ({
@@ -879,6 +879,7 @@ const GetDonatedData = async (req, res) => {
       MobileNumber: staff.MobileNumber,
       College: staff.College,
       Department: staff.Department,
+      BloodGroup: staff.BloodGroup,
       Venue: staff.Venue,
       Gender: staff.Gender,
     }));
@@ -890,6 +891,7 @@ const GetDonatedData = async (req, res) => {
       MobileNumber: student.MobileNumber,
       College: student.College,
       Department: student.Department,
+      BloodGroup: student.BloodGroup,
       Venue: student.Venue,
       Gender: student.Gender,
     }));
@@ -902,6 +904,7 @@ const GetDonatedData = async (req, res) => {
         MobileNumber: mg.MobileNumber,
         College: null, // No college field in M&G schema
         Department: null, // No department field in M&G schema
+        BloodGroup: mg.BloodGroup,
         Venue: mg.Venue,
         Gender: mg.Gender,
       })

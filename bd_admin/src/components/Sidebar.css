@@ -333,6 +333,20 @@ body {
   height: 300px;
 }
 
+.sidebar-logo {
+  max-width: 100%;
+  height: 60px;       /* default for desktop */
+  object-fit: contain;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar-logo {
+    height: 40px;     /* smaller on mobile */
+  }
+}
+
+
 /* End Main  */
 
 @media only screen and (max-width:475px){

@@ -61,6 +61,8 @@ function Sidebar({ openSidebarToggle, OpenSidebar, isSidebarCollapsed, onSidebar
     visible: { opacity: 1, x: 10, pointerEvents: "auto" },
   };
   const [isRotatedDonar, setIsRotatedDonar] = useState(false);
+  console.log("logoHome value:", logoHome);
+
   return (
     <motion.aside
       id="sidebar"
@@ -85,7 +87,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar, isSidebarCollapsed, onSidebar
       <div className="sidebar-title" style={{ margin: "0", padding: "0px 0px 10px", backgroundColor: "rgba(32, 31, 31, 0.2)" }}>
         <div className="sidebar-brand" >
           <center>
-            {!isSidebarCollapsed ? <img src={logoHome} height={"60px"} alt="logo" /> : <img src={adityalogo} height={"52px"} alt="logo" />}
+            {!isSidebarCollapsed ? <img src={logoHome} className="sidebar-logo" height={"60px"} alt="logo" /> : <img src={adityalogo} height={"52px"} alt="logo" />}
           </center>
         </div>
         <span className="icon close_icon" onClick={OpenSidebar}>
