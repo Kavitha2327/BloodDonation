@@ -19,6 +19,7 @@ const DataTableComponent = () => {
       { label: "Mobile", field: "mobileNumber", sort: "asc", width: 120 },
       { label: "College", field: "college", sort: "asc", width: 150 },
       { label: "Department", field: "department", sort: "asc", width: 150 },
+      { label: "Blood Group", field: "bloodGroup", sort: "asc", width: 120 },
       { label: "Venue", field: "venue", sort: "asc", width: 150 },
       { label: "Event Date", field: "eventDate", sort: "asc", width: 280 },
     ],
@@ -43,6 +44,7 @@ const DataTableComponent = () => {
           mobileNumber: item.MobileNumber || "-",
           college: item.College || "-",
           department: item.Department || "-",
+          bloodGroup: item.BloodGroup || "-",
           venue: item.Venue || "-",
           eventDate: moment(date).format("DD-MM-YYYY") || "-", // Use date passed as parameter
         }));
