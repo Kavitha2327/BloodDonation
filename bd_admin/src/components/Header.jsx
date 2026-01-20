@@ -17,6 +17,10 @@ import { Padding } from "@mui/icons-material";
 
 import { useAuth } from "../context/AuthContext";
 import './header.css'
+import adityalogo from '../assets/aditya.png'
+import logoHome from '../assets/logoHome.png'
+
+
 
 function Header({ isSidebarCollapsed }) {
   const [toggler, settoggler] = useState(false);
@@ -117,7 +121,7 @@ function Header({ isSidebarCollapsed }) {
             exit="exit"
           >
             <div className="sidebar-header" style={{ marginLeft: "-23px", marginBottom: "10px" }}>
-              <img src="/logoHome.png" height={"59.9px"} alt="logo" onClick={closeSidebar} style={{ backgroundColor: "rgba(32, 31, 31, 0.4)" }} />
+              <img src={logoHome} height={"59.9px"} alt="logo" onClick={closeSidebar} style={{ backgroundColor: "rgba(32, 31, 31, 0.4)" }} />
             </div>
 
 
@@ -201,7 +205,7 @@ function Header({ isSidebarCollapsed }) {
                           {[
                             { name: "Student", icon: <FaUserGraduate />, path: "/blooddonationadmin/donor-forms/student" },
                             { name: "Staff", icon: <FaChalkboardTeacher />, path: "/blooddonationadmin/donor-forms/staff" },
-                            { name: "Guest", icon: <FaUserTie />, path: "/blooddonationadmin/donor-forms/blooddonationadmin/guest" },
+                            { name: "Guest", icon: <FaUserTie />, path: "/blooddonationadmin/donor-forms/guest" },
                           ].map((subcategory) => (
                             <motion.li
                               key={subcategory.name}
