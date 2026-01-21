@@ -9,7 +9,7 @@ import {
   BsChevronUp,
 } from "react-icons/bs";
 import { FaUserGraduate, FaChalkboardTeacher, FaUserTie } from "react-icons/fa";
-import { MdEvent, MdPhotoLibrary, MdVolunteerActivism } from "react-icons/md";
+import { MdEvent, MdPhotoLibrary, MdVolunteerActivism ,MdSchool} from "react-icons/md";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -240,13 +240,19 @@ function Header({ isSidebarCollapsed }) {
                           exit="exit"
                         >
                           {[
-                            // { name: "Event", icon: <MdEvent />, path: "/blooddonationadmin/event" },
+                            { name: "Event", icon: <MdEvent />, path: "/blooddonationadmin/event" },
                             { name: "Gallery", icon: <MdPhotoLibrary />, path: "/blooddonationadmin/gallery" },
                             {
                               name: "Volunteer",
                               icon: <MdVolunteerActivism />,
                               path: "/blooddonationadmin/volunteer",
                             },
+                            {
+                              name:"Add Colleges",
+                              icon:<MdSchool/>,
+                              path:"/blooddonationadmin/add-colleges"
+
+                            }
                           ].map((subcategory) => (
                             <motion.li
                               key={subcategory.name}
