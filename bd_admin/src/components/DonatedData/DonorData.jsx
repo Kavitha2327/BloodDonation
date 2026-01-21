@@ -27,11 +27,18 @@ const DataTableComponent = () => {
   });
 
   const port = import.meta.env.VITE_BACKEND_PORT;
+  const [bloodGroup, setBloodGroup] = useState("");
+  const [donorType, setDonorType] = useState(""); // student | staff | ""
+
 
   useEffect(() => {
     axios
       .get(port + "get-donated-data", {
-        params: { eventDate: date },
+        params: {
+          eventDate: date,
+          type: donorType,
+          bloodGroup: bloodGroup,
+        },
       })
       .then((response) => {
         const data = response.data;
@@ -49,6 +56,8 @@ const DataTableComponent = () => {
           eventDate: moment(date).format("DD-MM-YYYY") || "-", // Use date passed as parameter
         }));
 
+        console.log("TYPE RECEIVED:", donorType);
+
         setTableData((prevData) => ({
           ...prevData,
           rows,
@@ -57,7 +66,7 @@ const DataTableComponent = () => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [date]);
+  }, [date, donorType, bloodGroup]);
 
   const downloadExcel = async () => {
     const workbook = new ExcelJS.Workbook();
@@ -71,6 +80,7 @@ const DataTableComponent = () => {
       { header: "Mobile", key: "mobileNumber", width: 15 },
       { header: "College", key: "college", width: 25 },
       { header: "Department", key: "department", width: 25 },
+      { header: "Blood Group", key: "bloodGroup", width: 20 },
       { header: "Venue", key: "venue", width: 20 },
       { header: "Event Date", key: "eventDate", width: 15 },
     ];
@@ -84,6 +94,7 @@ const DataTableComponent = () => {
         mobileNumber: row.mobileNumber,
         college: row.college,
         department: row.department,
+        bloodGroup: row.bloodGroup,
         venue: row.venue,
         eventDate: row.eventDate,
       });
@@ -157,6 +168,38 @@ const DataTableComponent = () => {
           {eventName.toUpperCase()}
         </p>
       </div>
+      {/* for filtering */}
+      <div className="d-flex gap-3 mb-3 justify-content-end"> 
+        <select
+          className="form-control"
+          style={{ width: "180px" }}
+          value={donorType}
+          onChange={(e) => setDonorType(e.target.value)}
+        >
+          <option value="">All</option>
+          <option value="student">Student</option>
+          <option value="staff">Staff</option>
+          <option value="managementAndGuest">Management & Guest</option>
+        </select>
+
+        <select
+          className="form-control"
+          style={{ width: "180px" }}
+          value={bloodGroup}
+          onChange={(e) => setBloodGroup(e.target.value)}
+        >
+          <option value="">All Blood Groups</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+        </select>
+      </div>
+
       <Row>
         <Col className="col-12">
           <Card
@@ -214,6 +257,7 @@ const DataTableComponent = () => {
                 bordered
                 small
                 data={tableData}
+                searching={false}
                 responsive
                 pagesAmount={3}
                 noBottomColumns
