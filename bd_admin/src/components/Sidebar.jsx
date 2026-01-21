@@ -150,7 +150,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar, isSidebarCollapsed, onSidebar
             isSidebarCollapsed && hoveredItem === "donor-form" && <li
               className="hiddenboxicon"
             >
-              <Link to={`/blooddonationadmin/donor-forms/student`} >
+              <Link to="/blooddonationadmin/donor-forms/student" >
                 <div >Student</div>
               </Link>
               <Link to="/blooddonationadmin/donor-forms/staff">
