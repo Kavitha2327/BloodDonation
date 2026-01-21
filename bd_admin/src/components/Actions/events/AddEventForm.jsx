@@ -15,7 +15,7 @@ const AddEventForm = ({ isOpen, toggle, onSuccess, editMode = false, existingEve
     name: "",
     colleges: [
       {
-        name: "",
+        name: "Aditya University",
         bloodBanks: [
           {
             nameOfTheBloodBank: "",
@@ -353,7 +353,7 @@ const AddEventForm = ({ isOpen, toggle, onSuccess, editMode = false, existingEve
       name: "",
       colleges: [
         {
-          name: "",
+          name: "Aditya Univerisity",
           bloodBanks: [
             {
               nameOfTheBloodBank: "",
@@ -508,20 +508,20 @@ const AddEventForm = ({ isOpen, toggle, onSuccess, editMode = false, existingEve
                   <div className="mb-3">
                     <label className="form-label">College Name</label>
                     <Input
-                      type="select"
+                      type="text"
                       value={college.name}
                       onChange={(e) => handleChange(e, collegeIndex, null, "name")}
                       className={`form-control ${errors[`college_${collegeIndex}`] ? "is-invalid" : ""}`}
                       disabled={loadingColleges}
                     >
-                      <option value="">
+                      {/* <option value="">
                         {loadingColleges ? "Loading colleges..." : "Select a college"}
                       </option>
                       {collegesList.map((collegeOption) => (
                         <option key={collegeOption._id} value={collegeOption.collegeName}>
                           {collegeOption.collegeName} ({collegeOption.collegeCode})
                         </option>
-                      ))}
+                      ))} */}
                     </Input>
                     {errors[`college_${collegeIndex}`] && (
                       <div className="invalid-feedback">{errors[`college_${collegeIndex}`]}</div>
