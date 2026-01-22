@@ -67,7 +67,11 @@ const StaffSchema = mongoose.Schema({
     EventDate: {
       type: Date,
       required: true
-    }
+    },
+    Address: {
+    type: String,
+    required: true,
+  },
   })
 
 module.exports = mongoose.model('Staff', StaffSchema);

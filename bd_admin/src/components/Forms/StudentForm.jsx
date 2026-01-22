@@ -62,6 +62,7 @@ function StudentForm() {
     NumberOfTimesDonatedInCampus: "",
     NumberOfTimesDonatedOutside: "",
     EventDate: moment(date).format("DD-MM-YYYY"),
+    Address: "",
 
     CollegeEvent: null,
     BloodBank: null,
@@ -167,6 +168,7 @@ function StudentForm() {
       Gender: formData.Gender?.value.trim().toUpperCase() || "",
       EventDate: date, // Send full EventDate object
       //   Venue: formData.Venue?.value || "",
+      Address: formData.Address || "",
       collegeCode: collegeCode || formData.College.toUpperCase(),
     };
 
@@ -742,6 +744,16 @@ function StudentForm() {
                         readOnly
                       />
                     </FormGroup>
+                  </Col>
+                  <Col>
+                    <AvField
+                      name="Address"
+                      label="Address"
+                      value={formData.Address}
+                      placeholder="Enter Address"
+                      onChange={handleInputChange}
+                      validate={{ required: { value: true } }}
+                    />
                   </Col>
                   {/* <Col> */}
                   {/* <FormGroup>

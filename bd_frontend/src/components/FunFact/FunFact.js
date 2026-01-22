@@ -64,7 +64,17 @@ const FunFactSection = (props) => {
             sclass: 'factBlock--five',
         },
     
-    ]
+    ];
+     const formatValue = (value) => {
+        if (value === null || value === undefined) {
+            return { numericValue: 0, suffix: "" };
+        }
+        // Extract numeric and suffix portions
+        const numericValue = parseInt(value);
+        const suffix = typeof value === 'string' ? value.replace(/\d+/, '') : '';
+
+        return { numericValue, suffix };
+    };
 
     return (
 
@@ -84,38 +94,42 @@ const FunFactSection = (props) => {
                 </div>
                 <div className="factWrapper">
                     <div className="row gx-50">
-                        {FunFact.slice(0, 3).map((funfact, fitem) => (
+                        {FunFact.slice(0, 3).map((funfact, fitem) => {
+                            const { numericValue, suffix } = formatValue(funfact.title);
+                            return (
                             <div className="col-lg-4" key={fitem}>
                                 <div className={`factBlock ${funfact.sclass}`}>
-                                    <h3 className="factBlock__heading"><span className="factBlock__number"><CountUp end={funfact.title} enableScrollSpy /></span><span
+                                    <h3 className="factBlock__heading"><span className="factBlock__number"><CountUp end={numericValue} enableScrollSpy /></span><span
                                         className="factBlock__ext">{funfact.symbol}</span>
                                     </h3>
                                     <span className="factBlock__tag">{funfact.subTitle}</span>
                                     <p className="factBlock__text">{funfact.des}</p>
                                 </div>
                             </div>
-                        ))}
+                        );})}
                     </div>
                 </div>
                 <div className="factWrapper factWrapper--two">
                     <div className="row justify-content-center gx-50">
-                        {FunFact.slice(3, 5).map((funfact, fitem) => (
+                        {FunFact.slice(3, 5).map((funfact, fitem) =>{ 
+                            const { numericValue, suffix } = formatValue(funfact.title);
+                            return (
                             <div className="col-lg-4" key={fitem}>
                                 <div className={`factBlock ${funfact.sclass}`}>
-                                    <h3 className="factBlock__heading"><span className="factBlock__number"><CountUp end={funfact.title} enableScrollSpy /></span><span
+                                    <h3 className="factBlock__heading"><span className="factBlock__number"><CountUp end={numericValue} enableScrollSpy /></span><span
                                         className="factBlock__ext">{funfact.symbol}</span>
                                     </h3>
                                     <span className="factBlock__tag">{funfact.subTitle}</span>
                                     <p className="factBlock__text">{funfact.des}</p>
                                 </div>
                             </div>
-                        ))}
+                        );})}
                     </div>
                 </div>
                 <CtaSection/>
             </div>
         </section>
-    )
-}
+    )}
+
 
 export default FunFactSection;

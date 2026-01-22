@@ -19,7 +19,7 @@ const DataTableComponent = () => {
       { label: "Mobile", field: "mobileNumber", sort: "asc", width: 120 },
       { label: "College", field: "college", sort: "asc", width: 150 },
       { label: "Department", field: "department", sort: "asc", width: 150 },
-      { label: "Blood Group", field: "bloodGroup", sort: "asc", width: 120 },
+      // { label: "Blood Group", field: "bloodGroup", sort: "asc", width: 120 },
       { label: "Venue", field: "venue", sort: "asc", width: 150 },
       { label: "Event Date", field: "eventDate", sort: "asc", width: 280 },
     ],
@@ -54,6 +54,7 @@ const DataTableComponent = () => {
           bloodGroup: item.BloodGroup || "-",
           venue: item.Venue || "-",
           eventDate: moment(date).format("DD-MM-YYYY") || "-", // Use date passed as parameter
+          address: item.Address || "-",
         }));
 
         console.log("TYPE RECEIVED:", donorType);
@@ -83,6 +84,7 @@ const DataTableComponent = () => {
       { header: "Blood Group", key: "bloodGroup", width: 20 },
       { header: "Venue", key: "venue", width: 20 },
       { header: "Event Date", key: "eventDate", width: 15 },
+      { header: "Address", key: "address", width: 30 },
     ];
 
     tableData.rows.forEach((row, index) => {
@@ -97,6 +99,7 @@ const DataTableComponent = () => {
         bloodGroup: row.bloodGroup,
         venue: row.venue,
         eventDate: row.eventDate,
+        address: row.address,
       });
     });
 

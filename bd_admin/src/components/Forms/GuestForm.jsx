@@ -25,6 +25,7 @@ function ManagementAndGuestForm() {
     NumberOfTimesDonatedInCampus: "",
     NumberOfTimesDonatedOutside: "",
     EventDate: date.split("-").reverse().join("-"),
+    Address: "",
     CollegeEvent: null,
     BloodBank: null,
     Venue: null,
@@ -117,6 +118,7 @@ const handleSubmit = () => {
     Gender: formData.Gender?.value.trim().toUpperCase() || "",
     EventDate: date, // Send full EventDate object
     // Venue: formData.Venue?.value || "",
+    Address: formData.Address || "",
     TypeOfDonor: formData.TypeOfDonor?.value || "",
   };
 
@@ -368,7 +370,17 @@ const venueOption = selectedCollegeData
 
 
               </Col>
-
+                <Col>
+                      <AvField
+                           name="Address"
+                           label="Address"
+                           value={formData.Address}
+                           placeholder="Enter Address"
+                           onChange={handleInputChange}
+                           validate={{ required: { value: true } }}
+                       />
+                </Col>           
+                        
 
             </Row>
             <Row>

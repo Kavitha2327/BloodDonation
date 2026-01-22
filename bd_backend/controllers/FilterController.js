@@ -161,6 +161,7 @@ const BloodGroupHandler = async (req, res) => {
 // --------------------------------------------------------------------------------------------------------------------------------
 
 const DonorCountHandler = async (req, res) => {
+  
   try {
     const { collegeCode, EventDate, Department } = req.query;
 
@@ -191,6 +192,7 @@ const DonorCountHandler = async (req, res) => {
       }
 
       let groupStage;
+      
       if (Department) {
         groupStage = {
           _id: "$Department",
@@ -207,7 +209,7 @@ const DonorCountHandler = async (req, res) => {
           donorCount: { $sum: 1 },
         };
       }
-
+      
       aggregationPipeline.push({ $group: groupStage });
 
       studentCount = await StudentSchema.aggregate(aggregationPipeline);
@@ -832,98 +834,98 @@ const RegisteredDataHandler = async (req, res) => {
   }
 };
 
-const GetDonatedData = async (req, res) => {
-  try {
-    const { eventDate } = req.query; // EventDate will be passed as a query parameter
-    // console.log(`Received EventDate: ${eventDate}`);
+// const GetDonatedData = async (req, res) => {
+//   try {
+//     const { eventDate } = req.query; // EventDate will be passed as a query parameter
+//     // console.log(`Received EventDate: ${eventDate}`);
 
-    if (!eventDate) {
-      return res.status(400).json({ message: "EventDate is required" });
-    }
+//     if (!eventDate) {
+//       return res.status(400).json({ message: "EventDate is required" });
+//     }
 
-    // Parse EventDate to ensure proper format
-    const parsedEventDate = new Date(eventDate);
+//     // Parse EventDate to ensure proper format
+//     const parsedEventDate = new Date(eventDate);
 
-    if (isNaN(parsedEventDate)) {
-      return res.status(400).json({
-        message: "Invalid EventDate format. Use YYYY-MM-DD or ISO format.",
-      });
-    }
+//     if (isNaN(parsedEventDate)) {
+//       return res.status(400).json({
+//         message: "Invalid EventDate format. Use YYYY-MM-DD or ISO format.",
+//       });
+//     }
 
-    // console.log(`Parsed EventDate: ${parsedEventDate}`);
+//     // console.log(`Parsed EventDate: ${parsedEventDate}`);
 
-    // Define start and end of the day to query a full day
-    const startOfDay = new Date(parsedEventDate.setHours(0, 0, 0, 0));
-    const endOfDay = new Date(parsedEventDate.setHours(23, 59, 59, 999));
+//     // Define start and end of the day to query a full day
+//     const startOfDay = new Date(parsedEventDate.setHours(0, 0, 0, 0));
+//     const endOfDay = new Date(parsedEventDate.setHours(23, 59, 59, 999));
 
-    // Fetch data from all schemas based on the EventDate
-    const staffData = await StaffSchema.find({
-      EventDate: { $gte: startOfDay, $lt: endOfDay },
-    }).select("Name MobileNumber College Department Venue Gender EmployeeId BloodGroup");
+//     // Fetch data from all schemas based on the EventDate
+//     const staffData = await StaffSchema.find({
+//       EventDate: { $gte: startOfDay, $lt: endOfDay },
+//     }).select("Name MobileNumber College Department Venue Gender EmployeeId BloodGroup");
 
-    const studentData = await StudentSchema.find({
-      EventDate: { $gte: startOfDay, $lt: endOfDay },
-    }).select("Name MobileNumber College Department Venue Gender Rollno BloodGroup");
+//     const studentData = await StudentSchema.find({
+//       EventDate: { $gte: startOfDay, $lt: endOfDay },
+//     }).select("Name MobileNumber College Department Venue Gender Rollno BloodGroup");
 
-    const managementAndGuestData = await managementandguest
-      .find({
-        EventDate: { $gte: startOfDay, $lt: endOfDay },
-      })
-      .select("Name TypeOfDonor MobileNumber Venue Gender BloodGroup");
+//     const managementAndGuestData = await managementandguest
+//       .find({
+//         EventDate: { $gte: startOfDay, $lt: endOfDay },
+//       })
+//       .select("Name TypeOfDonor MobileNumber Venue Gender BloodGroup");
 
-    // Map data to a uniform structure
-    const formattedStaffData = staffData.map((staff) => ({
-      Name: staff.Name,
-      Type: "Staff",
-      Id: staff.EmployeeId, // Use EmployeeId as Id
-      MobileNumber: staff.MobileNumber,
-      College: staff.College,
-      Department: staff.Department,
-      BloodGroup: staff.BloodGroup,
-      Venue: staff.Venue,
-      Gender: staff.Gender,
-    }));
+//     // Map data to a uniform structure
+//     const formattedStaffData = staffData.map((staff) => ({
+//       Name: staff.Name,
+//       Type: "Staff",
+//       Id: staff.EmployeeId, // Use EmployeeId as Id
+//       MobileNumber: staff.MobileNumber,
+//       College: staff.College,
+//       Department: staff.Department,
+//       BloodGroup: staff.BloodGroup,
+//       Venue: staff.Venue,
+//       Gender: staff.Gender,
+//     }));
 
-    const formattedStudentData = studentData.map((student) => ({
-      Name: student.Name,
-      Type: "Student",
-      Id: student.Rollno, // Use Rollno as Id
-      MobileNumber: student.MobileNumber,
-      College: student.College,
-      Department: student.Department,
-      BloodGroup: student.BloodGroup,
-      Venue: student.Venue,
-      Gender: student.Gender,
-    }));
+//     const formattedStudentData = studentData.map((student) => ({
+//       Name: student.Name,
+//       Type: "Student",
+//       Id: student.Rollno, // Use Rollno as Id
+//       MobileNumber: student.MobileNumber,
+//       College: student.College,
+//       Department: student.Department,
+//       BloodGroup: student.BloodGroup,
+//       Venue: student.Venue,
+//       Gender: student.Gender,
+//     }));
 
-    const formattedManagementAndGuestData = managementAndGuestData.map(
-      (mg) => ({
-        Name: mg.Name,
-        Type: mg.TypeOfDonor, // Use TypeOfDonor as Type
-        Id: null, // No unique identifier for M&G
-        MobileNumber: mg.MobileNumber,
-        College: null, // No college field in M&G schema
-        Department: null, // No department field in M&G schema
-        BloodGroup: mg.BloodGroup,
-        Venue: mg.Venue,
-        Gender: mg.Gender,
-      })
-    );
+//     const formattedManagementAndGuestData = managementAndGuestData.map(
+//       (mg) => ({
+//         Name: mg.Name,
+//         Type: mg.TypeOfDonor, // Use TypeOfDonor as Type
+//         Id: null, // No unique identifier for M&G
+//         MobileNumber: mg.MobileNumber,
+//         College: null, // No college field in M&G schema
+//         Department: null, // No department field in M&G schema
+//         BloodGroup: mg.BloodGroup,
+//         Venue: mg.Venue,
+//         Gender: mg.Gender,
+//       })
+//     );
 
-    // Combine all data into a single array
-    const allData = [
-      ...formattedStaffData,
-      ...formattedStudentData,
-      ...formattedManagementAndGuestData,
-    ];
+//     // Combine all data into a single array
+//     const allData = [
+//       ...formattedStaffData,
+//       ...formattedStudentData,
+//       ...formattedManagementAndGuestData,
+//     ];
 
-    // console.log(`Total records found: ${allData.length}`);
-    res.status(200).json(allData);
-  } catch (error) {
-    console.error("Error fetching donated data:", error);
-    res.status(500).json({ message: "Internal server error", error });
-  }
-};
+//     // console.log(`Total records found: ${allData.length}`);
+//     res.status(200).json(allData);
+//   } catch (error) {
+//     console.error("Error fetching donated data:", error);
+//     res.status(500).json({ message: "Internal server error", error });
+//   }
+// };
 
 // --------------------------------------------------------------------------------------------------------------------------------
 
@@ -967,6 +969,115 @@ const GetDonatedData = async (req, res) => {
 // }
 
 // --------------------------------------------------------------------------------------------------------------------------------
+
+const GetDonatedData = async (req, res) => {
+  try {
+    const { eventDate, type, bloodGroup } = req.query;
+    
+
+    if (!eventDate) {
+      return res.status(400).json({ message: "EventDate is required" });
+    }
+
+    const parsedEventDate = new Date(eventDate);
+    if (isNaN(parsedEventDate)) {
+      return res.status(400).json({
+        message: "Invalid EventDate format. Use YYYY-MM-DD",
+      });
+    }
+
+    const startOfDay = new Date(parsedEventDate.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(parsedEventDate.setHours(23, 59, 59, 999));
+
+    //  Common date filter
+    const baseFilter = {
+      EventDate: { $gte: startOfDay, $lt: endOfDay },
+    };
+
+    if (bloodGroup) {
+      baseFilter.BloodGroup = bloodGroup;
+    }
+
+    let staffData = [];
+    let studentData = [];
+    let managementAndGuestData = [];
+
+    //  Student
+    if (!type || type === "student") {
+      studentData = await StudentSchema.find(baseFilter).select(
+        "Name MobileNumber College Department Venue Gender Rollno BloodGroup Address"
+      );
+    }
+
+    //  Staff
+    if (!type || type === "staff") {
+      staffData = await StaffSchema.find(baseFilter).select(
+        "Name MobileNumber College Department Venue Gender EmployeeId BloodGroup Address"
+      );
+    }
+
+    //  Management & Guest 
+    if (!type || type === "managementAndGuest" ) {
+      managementAndGuestData = await managementandguest
+        .find(baseFilter)
+        .select("Name TypeOfDonor MobileNumber Venue Gender BloodGroup Address");
+    }
+    
+    //  Normalize data
+    const formattedStudentData = studentData.map((student) => ({
+      Name: student.Name,
+      Type: "Student",
+      Id: student.Rollno,
+      MobileNumber: student.MobileNumber,
+      College: student.College,
+      Department: student.Department,
+      BloodGroup: student.BloodGroup,
+      Venue: student.Venue,
+      Gender: student.Gender,
+      Address: student.Address,
+    }));
+
+    const formattedStaffData = staffData.map((staff) => ({
+      Name: staff.Name,
+      Type: "Staff",
+      Id: staff.EmployeeId,
+      MobileNumber: staff.MobileNumber,
+      College: staff.College,
+      Department: staff.Department,
+      BloodGroup: staff.BloodGroup,
+      Venue: staff.Venue,
+      Gender: staff.Gender,
+      Address: staff.Address,
+    }));
+
+    const formattedManagementAndGuestData = managementAndGuestData.map(
+      (mg) => ({
+        Name: mg.Name,
+        Type: mg.TypeOfDonor,
+        Id: null,
+        MobileNumber: mg.MobileNumber,
+        College: null,
+        Department: null,
+        BloodGroup: mg.BloodGroup,
+        Venue: mg.Venue,
+        Gender: mg.Gender,
+        Address: mg.Address,
+      })
+    );
+
+    const allData = [
+      ...formattedStudentData,
+      ...formattedStaffData,
+      ...formattedManagementAndGuestData,
+    ];
+
+    res.status(200).json(allData);
+  } catch (error) {
+    console.error("Error fetching donated data:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 
 const registeredStudent = async (req, res) => {
   const { RollNumber } = req.body;

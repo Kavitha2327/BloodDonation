@@ -37,6 +37,10 @@ const ManagementAndGuestSchema = mongoose.Schema({
       type: Date,
       required: true
     },
+    Address: {
+    type: String,
+    required: true,
+  },
     CollegeEvent:{
       type:String,
       required:true

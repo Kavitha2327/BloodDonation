@@ -26,6 +26,7 @@ function StaffForm() {
         NumberOfTimesDonatedInCampus: "",
         NumberOfTimesDonatedOutside: "",
         EventDate: moment(date).format("DD-MM-YYYY"),
+        Address: "",
         CollegeEvent: null,
         BloodBank: null,
         Venue: null,
@@ -204,6 +205,7 @@ function StaffForm() {
             Gender: formData.Gender.trim().toUpperCase() || "",
             EventDate: date, // Send full EventDate object
             // Venue: formData.Venue?.value || "",
+            Address: formData.Address || "",
         };
 
         const port = import.meta.env.VITE_BACKEND_PORT;
@@ -551,6 +553,16 @@ function StaffForm() {
 
 
                                     </Col>
+                                    <Col>
+                                                        <AvField
+                                                          name="Address"
+                                                          label="Address"
+                                                          value={formData.Address}
+                                                          placeholder="Enter Address"
+                                                          onChange={handleInputChange}
+                                                          validate={{ required: { value: true } }}
+                                                        />
+                                                      </Col>
 
                                 </Row>
                                 <Row>
