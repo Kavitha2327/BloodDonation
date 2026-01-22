@@ -82,7 +82,7 @@ const DonationListing = (props) => {
                                                     onMouseEnter={() => handleMouseEnter(index)} >
                                                     <div className="featureBlock__wrap hoverEffect2">
                                                         <figure className="featureBlock__thumb" style = {{ height: '200px', width: '100%', overflow: 'hidden' }}>
-                                                            <Link  to={`#`} className="featureBlock__thumb__link">
+                                                            <Link  to={`/blooddonation/register`} className="featureBlock__thumb__link">
                                                                 <img src={ bloodImage /*port + "Events/" + donation.filename*/} alt="" style={{
                                                                 width: '100%',
                                                                 height: '100%',
@@ -100,7 +100,7 @@ const DonationListing = (props) => {
 
                                                         <div className="featureBlock__content">
                                                             <h3 className="featureBlock__heading">
-                                                                <Link  to={`#`} className="featureBlock__heading__link">
+                                                                <Link  to={`/blooddonation/register`} className="featureBlock__heading__link">
                                                                     {donation.EventName}
                                                                 </Link>
                                                             </h3>

@@ -1,6 +1,0 @@
-*.zip
-node_modules/
-.env
-.next
-dist
-build

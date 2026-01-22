@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, forwardRef } from "react";
 import {
   Row,
   Modal,
@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 import axios from "axios";
 
-const AddEventForm = ({ isOpen, toggle, onSuccess, editMode = false, existingEvent = null }) => {
+const AddEventForm = forwardRef(({ isOpen, toggle, onSuccess, editMode = false, existingEvent = null },ref) => {
   const [formData, setFormData] = useState({
     name: "",
     colleges: [
@@ -386,12 +386,11 @@ const AddEventForm = ({ isOpen, toggle, onSuccess, editMode = false, existingEve
         centered
       >
       <ModalHeader toggle={toggle} className="bg-primary text-white">
-        <h4 className="mb-0">{editMode ? 'Edit Event Details' : 'Add Event Details'}</h4>
+        {editMode ? 'Edit Event Details' : 'Add Event Details'}
       </ModalHeader>
-      <form onSubmit={handleSave}>
+      <form onSubmit={handleSave} ref={ref}>
         <ModalBody 
-          ref={modalBodyRef}
-          style={{ 
+            style={{ 
             maxHeight: "70vh", 
             overflowY: "auto",
             overflowX: "hidden",
@@ -400,7 +399,7 @@ const AddEventForm = ({ isOpen, toggle, onSuccess, editMode = false, existingEve
           }}
         >
           {/* Wrapper with proper padding to ensure smooth scrolling */}
-          <div style={{ 
+          <div  ref={modalBodyRef} style={{ 
             padding: "1.5rem 1rem", 
             minHeight: "100px"
           }}>
@@ -642,6 +641,10 @@ const AddEventForm = ({ isOpen, toggle, onSuccess, editMode = false, existingEve
     </Modal>
     </>
   );
-};
+}
+);
+
+AddEventForm.displayName = "AddEventForm";
+
 
 export default AddEventForm;
