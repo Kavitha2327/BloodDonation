@@ -78,7 +78,7 @@ function CollegeWiseChart() {
   }, []); // Empty dependency array ensures this effect runs only once
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
+    <div style={{ display: "flex", justifyContent: "center",alignItems:"center", flexDirection: "column" }}>
       <h4 className="chart-title" style={{ marginBottom: 20, alignSelf: "center", marginTop: 20 }}>
         College-Wise Count
       </h4>

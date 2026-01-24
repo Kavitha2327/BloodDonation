@@ -62,8 +62,8 @@ export default function BloodGroupChart(props) {
   }, [props.college]); // Re-run when `props.college` changes
 
   return (
-    <div className="chart2">
-      <h2 className="chart-title">Blood Group-Wise Count</h2>
+    <div style={{ display: "flex", justifyContent: "center",alignItems:"center", flexDirection: "column" }}>
+      <h4 className="chart-title" style={{ marginBottom: 20, alignSelf: "center", marginTop: 20 }}>Blood Group-Wise Count</h4>
       {isLoading ? (
         <div>Loading...</div> // Display loading message while data is being fetched
       ) : (
