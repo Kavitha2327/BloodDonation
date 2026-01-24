@@ -51,7 +51,7 @@ function BranchWiseChart() {
   }, []);
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
+    <div style={{ display: "flex", justifyContent: "center",alignItems:"center", flexDirection: "column" }}>
       <h4
         className="chart-title"
         style={{ marginBottom: 20, alignSelf: "center", marginTop: 20 }}
@@ -66,6 +66,10 @@ function BranchWiseChart() {
           series={data.series}
           width={window.innerWidth * 0.6}
           height={400}
+          barCategoryGap={20}
+          barGap={5}
+          animationEasing="ease-out"
+          animationDuration={800}
         />
       )}
     </div>

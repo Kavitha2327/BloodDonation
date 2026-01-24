@@ -18,6 +18,9 @@ function GenderWiseChart() {
       label: "FEMALE: 1",
     },
   ]);
+  const isMobile = window.innerWidth < 768;
+  const innerWidth=isMobile ? 250 : 300;
+  const innerheight=isMobile ? 250 : 300;
 
   const fetchGenderData = async () => {
     try {
@@ -43,35 +46,43 @@ function GenderWiseChart() {
       console.log("New registration detected");
       fetchGenderData(); // Re-fetch data on new registration
     });
+    const interval = setInterval(() => {
+      fetchGenderData();
+    }, 60000);
 
     // Cleanup the socket connection on unmount
     return () => {
       socket.off("new-registration"); // Remove the listener
       socket.disconnect(); // Disconnect the socket
+      clearInterval(interval);
     };
   }, []); // Empty dependency array ensures this effect runs only once
 
-  setTimeout(() => {
-    fetchGenderData();
-  }, 10000 * 6);
-
   return (
-    <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
+    <div style={{ display: "flex", justifyContent: "center",alignItems:"center", flexDirection: "column" }}>
       <h4
         className="chart-title"
-        style={{ marginBottom: 50, alignSelf: "center", marginTop: 20 }}
+        style={{ marginBottom: 20, alignSelf: "center", marginTop: 20,marginBottom: 40 }}
       >
         Gender-Wise Count
       </h4>
-      <PieChart
-        series={[
-          {
-            data, // Pass the updated data directly
-          },
-        ]}
-        width={window.innerWidth * 0.5}
-        height={window.innerHeight * 0.4}
-      />
+      <div style={{ width: "100%", maxWidth: 380 }}>
+        <PieChart
+          series={[{ data }]}
+          margin={{ bottom: 60,right:20 }}   // ✅ IMPORTANT
+          height={300}
+          slotProps={{
+            legend: {
+              direction: "row",
+              position: {
+                vertical: "bottom",
+                horizontal: "middle",
+              },
+            },
+          }}
+        />
+      </div>
+
     </div>
   );
 }

@@ -5,12 +5,13 @@ import Scrollbar from "../../components/scrollbar/scrollbar";
 import Footer from "../../components/footer/Footer";
 import LiveCountSlick from "./LiveCountSlick";
 import axios from "axios";
+import "./livecounts.css";
 import { io } from "socket.io-client";
 
 //const port = "https://adityauniversity.in/blooddonationbackend"; // Replace with your server URL if needed
 
-//const port = process.env.REACT_APP_SERVER_PORT
-const port = 'http://localhost:7001/blooddonationbackend/'
+const port = process.env.REACT_APP_SERVER_PORT
+// const port = 'http://localhost:7001/blooddonationbackend/'
 
 const StatisticsPage = (props) => {
   
@@ -70,30 +71,14 @@ const StatisticsPage = (props) => {
       <Header hclass={"header--styleFour"} />
       <main className="main" style={{ marginBottom: "40px" }}>
         <PageTitle pageTitle={"LIVE STATISTICS"} pagesub={"LIVE STATISTICS"} />
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            borderBottom: "3px solid black",
-            justifyContent: "center",
-            color: "red",
-            fontSize: 50,
-            fontWeight: 600,
-            marginTop: 50,
-          }}
+        <div 
+          className="live-count-title"
         >
           Live Count {liveCounts}
         </div>
 
         <div
-          style={{
-            height: 500,
-            width: "60%",
-            justifySelf: "center",
-            display: "block",
-            justifyContent: "center",
-            alignItems: "start",
-          }}
+          className="live-slider-wrapper"
         >
           <LiveCountSlick />
         </div>
