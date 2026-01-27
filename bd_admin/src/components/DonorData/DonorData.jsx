@@ -7,6 +7,7 @@ import "./DonorData.css";
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 const DataTableComponent = () => {
     // const port = import.meta.env.REACT_APP_SERVER_PORT;
@@ -164,7 +165,16 @@ const DataTableComponent = () => {
         <>
             <div className='main-title' style={{display:"flex", flexDirection: "column", cursor: "pointer"}}>
                 <h3 style={{ marginBottom: "20px", fontFamily: "Poppins" }} className="heading1">Registration details</h3>
-                <p style={{marginTop:"-10px", marginLeft:"5px", fontSize:'13px'}}> <span style={{fontWeight:"bold"}} className="heading2">HOME {'>'} </span>{eventName.toUpperCase()}</p>
+                <p style={{marginTop:"-10px", marginLeft:"5px", fontSize:'13px'}}> <Link to="/blooddonationadmin/home"><span style={{fontWeight:"bold",color:"#000"}} className="heading2">HOME {'>'} </span></Link><span
+                style={{
+                    fontWeight: 600,
+                    color: "#1976d2",
+                    letterSpacing: "0.5px",
+                }}
+                >
+                {eventName.toUpperCase()}
+                </span>
+                </p>
             </div>
             <Row>
                 <Col className="col-12">

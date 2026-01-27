@@ -66,11 +66,27 @@ function GenderWiseChart() {
       >
         Gender-Wise Count
       </h4>
-      <div style={{ width: "100%", maxWidth: 380 }}>
+      {/* <div style={{ width: "100%", maxWidth: 380 }}>
         <PieChart
           series={[{ data }]}
           margin={{ bottom: 60,right:20 }}   // ✅ IMPORTANT
-          height={300}
+          height={400}
+          slotProps={{
+            legend: {
+              direction: "row",
+              position: {
+                vertical: "bottom",
+                horizontal: "middle",
+              },
+            },
+          }}
+        />
+      </div> */}
+      <div style={{ width: "100%", height: "100%" }}>
+        <PieChart
+          series={[{ data }]}
+          margin={{ bottom: 70, right: 20 }}
+          height={window.innerWidth < 480 ? 280 : 400}
           slotProps={{
             legend: {
               direction: "row",
@@ -82,6 +98,7 @@ function GenderWiseChart() {
           }}
         />
       </div>
+
 
     </div>
   );

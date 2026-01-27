@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import {ResponsiveContainer, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 
@@ -67,21 +67,29 @@ export default function BloodGroupChart(props) {
       {isLoading ? (
         <div>Loading...</div> // Display loading message while data is being fetched
       ) : (
-        <BarChart
-          width={window.innerWidth * 0.6}
-          height={350}
-          data={donorData}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-        >
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip cursor={false} />
-          <Bar dataKey="count" shape={<TriangleBar />} label={{ position: 'top' }}>
-            {donorData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
-            ))}
-          </Bar>
-        </BarChart>
+        <ResponsiveContainer width="100%" height={350}>
+          <BarChart
+            data={donorData}
+            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          >
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip cursor={false} />
+
+            <Bar
+              dataKey="count"
+              shape={<TriangleBar />}
+              label={{ position: "top" }}
+            >
+              {donorData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={colors[index % colors.length]}
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
       )}
     </div>
   );

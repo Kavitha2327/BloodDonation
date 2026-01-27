@@ -559,4 +559,8 @@ body {
   font-weight: 600 !important;
   line-height: 1 !important;
 }
+
+.linkhover:hover {
+  color: blue !important;
+}
   
