@@ -43,3 +43,51 @@
     height: auto;
   }
 }
+
+.barChartContainer {
+  width: 100%;
+  height: 400px;
+}
+
+@media screen and (max-width: 768px) {
+  .barChartContainer {
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .barChartContainer {
+    height: 240px;
+  }
+}
+
+
+.barChartWrapper {
+  width: 100%;
+  height: 400px;
+}
+
+@media (max-width: 480px) {
+  .barChartWrapper {
+    height: 280px;
+  }
+}
+
+
+.responsiveBarChart2 {
+  width: 100%;
+  height: 450px; /* default desktop height */
+}
+
+@media (max-width: 770px) {
+  .responsiveBarChart2 {
+    height: 350px; /* tablet height */
+  }
+}
+
+@media (max-width: 480px) {
+  .responsiveBarChart2 {
+    height: 280px; /* mobile height */
+  }
+}
+

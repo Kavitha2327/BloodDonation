@@ -109,7 +109,17 @@ function Home() {
               <h3 className='body-text'>Welcome Back <span style={{ "fontSize": "20px" }}>👋</span> Admin</h3>
 
               <p style={{ "fontSize": "16px" , marginBottom: "0", marginTop: "20px"}} className='body-text'>Please refer to this link for live Website:</p>
-              <p style={{ "fontSize": "16px", cursor: "pointer" }} onClick={handleClick} className='body-text'>👉https://adityauniversity/blooddonation</p>
+              {/* <p style={{ "fontSize": "16px", cursor: "pointer" }} onClick={handleClick} className='body-text'>
+                👉https://adityauniversity/blooddonation</p> */}
+              <a
+                href="https://adityauniversity.in/blooddonation"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="body-text linkHover"
+              >
+                👉 https://adityauniversity.in/blooddonation
+              </a>
+
             </div>
             <div className="card-inner_right">
               <motion.img src={adminImg} alt="admin"

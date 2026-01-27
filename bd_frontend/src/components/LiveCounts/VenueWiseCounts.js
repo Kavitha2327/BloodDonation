@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import axios from "axios";
 import { io } from 'socket.io-client';
+import './livecounts.css';
 
 const port = process.env.REACT_APP_SERVER_PORT;
 
@@ -92,12 +93,17 @@ function VenueWiseCounts() {
       {isLoading ? (
         <p style={{ textAlign: "center" }}>Loading chart data...</p>
       ) : (
-        <BarChart
-          xAxis={data.xAxis}
-          series={data.series}
-          width={window.innerWidth * 0.6}
-          height={400}
-        />
+        <div className="responsiveBarChart2">
+            <BarChart
+              xAxis={data.xAxis}
+              series={data.series}
+              barCategoryGap={20}
+              barGap={5}
+              animationEasing="ease-out"
+              animationDuration={800}
+            />
+          </div>
+
       )}
     </div>
   );
